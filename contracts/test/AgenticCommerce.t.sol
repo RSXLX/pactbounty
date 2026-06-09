@@ -11,7 +11,7 @@ contract AgenticCommerceTest is Test {
 
     address client = address(0xA11CE);
     address provider = address(0xB0B);
-    address evaluator = address(0xEVAL);
+    address evaluator = address(0xE0A1);
 
     function setUp() public {
         token = new MockUSDC();
