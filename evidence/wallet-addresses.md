@@ -1,0 +1,11 @@
+# Wallet Addresses
+
+Replace these placeholder addresses after deploying/connecting real CAW wallets.
+
+| Role | Address |
+|---|---|
+| Client Agent | `0x1111111111111111111111111111111111111111` |
+| Worker Agent | `0x2222222222222222222222222222222222222222` |
+| Evaluator Agent | `0x3333333333333333333333333333333333333333` |
+| AgenticCommerce | `0x0000000000000000000000000000000000002000` |
+| MockUSDC | `0x0000000000000000000000000000000000001000` |

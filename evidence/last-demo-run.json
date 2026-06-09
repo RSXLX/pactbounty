@@ -1,0 +1,634 @@
+{
+  "summary": "PactBounty demo completed: CAW pacts created, escrow funded, worker submitted audit patch, evaluator released payment, and CAW denied an out-of-policy transfer.",
+  "pacts": [
+    {
+      "pact_id": "mock-pact-c041523d",
+      "wallet_id": "0x1111111111111111111111111111111111111111",
+      "status": "active",
+      "api_key": "mock-pact-key-5008d7174107",
+      "spec": {
+        "intent": "PactBounty Client Agent may approve MockUSDC, create an AgenticCommerce job, set its budget, and fund escrow within the approved demo budget.",
+        "wallet_id": "0x1111111111111111111111111111111111111111",
+        "allowed_contracts": [
+          "0x0000000000000000000000000000000000001000",
+          "0x0000000000000000000000000000000000002000"
+        ],
+        "allowed_functions": [
+          "approve",
+          "createJob",
+          "setBudget",
+          "fund",
+          "transfer_tokens"
+        ],
+        "max_single_tx_amount": 5000000,
+        "total_budget": 6000000,
+        "expires_in_seconds": 86400
+      }
+    },
+    {
+      "pact_id": "mock-pact-9b2edac6",
+      "wallet_id": "0x2222222222222222222222222222222222222222",
+      "status": "active",
+      "api_key": "mock-pact-key-1770777650b9",
+      "spec": {
+        "intent": "PactBounty Worker Agent may submit deliverable hashes to the AgenticCommerce escrow.",
+        "wallet_id": "0x2222222222222222222222222222222222222222",
+        "allowed_contracts": [
+          "0x0000000000000000000000000000000000002000"
+        ],
+        "allowed_functions": [
+          "submit"
+        ],
+        "max_single_tx_amount": 0,
+        "total_budget": 0,
+        "expires_in_seconds": 86400
+      }
+    },
+    {
+      "pact_id": "mock-pact-4a825220",
+      "wallet_id": "0x3333333333333333333333333333333333333333",
+      "status": "active",
+      "api_key": "mock-pact-key-4be31a91582a",
+      "spec": {
+        "intent": "PactBounty Evaluator Agent may complete or reject submitted jobs after verification.",
+        "wallet_id": "0x3333333333333333333333333333333333333333",
+        "allowed_contracts": [
+          "0x0000000000000000000000000000000000002000"
+        ],
+        "allowed_functions": [
+          "complete",
+          "reject"
+        ],
+        "max_single_tx_amount": 0,
+        "total_budget": 0,
+        "expires_in_seconds": 86400
+      }
+    }
+  ],
+  "job": {
+    "job_id": 1,
+    "client": "0x1111111111111111111111111111111111111111",
+    "provider": "0x2222222222222222222222222222222222222222",
+    "evaluator": "0x3333333333333333333333333333333333333333",
+    "token": "0x0000000000000000000000000000000000001000",
+    "budget": 5000000,
+    "escrowed": 0,
+    "expired_at": 1781083265,
+    "description_hash": "0xea77971fd99e923ec76b3d817ce0221f64a6e99437552c46d8944a098522c317",
+    "deliverable_hash": "0xb8e7bb6867b964ac166320a9d745cb45b383b6811760225928327c7ccb7b622f",
+    "reason_hash": "0x54e6ba211279bf51035042071089555f4b9e506d587ab1f52259154348aae0a4",
+    "state": "Completed"
+  },
+  "balances": {
+    "0x1111111111111111111111111111111111111111": 95000000,
+    "0x2222222222222222222222222222222222222222": 5000000,
+    "0x3333333333333333333333333333333333333333": 0,
+    "0xe5crow0000000000000000000000000000000000": 0
+  },
+  "audit_logs": [
+    {
+      "id": "audit-c8575819",
+      "ts": "2026-06-09T09:21:05.872837+00:00",
+      "wallet_id": "0x1111111111111111111111111111111111111111",
+      "pact_id": "mock-pact-c041523d",
+      "action": "transfer_tokens",
+      "contract": "0x0000000000000000000000000000000000001000",
+      "function_name": "transfer_tokens",
+      "amount": 20000000,
+      "result": "denied",
+      "reason": "amount 20000000 exceeds max_single_tx_amount 5000000",
+      "tx_hash": null,
+      "request_id": null,
+      "details": {
+        "purpose": "intentional policy-denial demo",
+        "destination": "0x9999999999999999999999999999999999999999",
+        "token_id": "mUSDC"
+      }
+    },
+    {
+      "id": "audit-9de16bb9",
+      "ts": "2026-06-09T09:21:05.872714+00:00",
+      "wallet_id": "0x3333333333333333333333333333333333333333",
+      "pact_id": "mock-pact-4a825220",
+      "action": "contract_call",
+      "contract": "0x0000000000000000000000000000000000002000",
+      "function_name": "complete",
+      "amount": 0,
+      "result": "allowed",
+      "reason": "within pact policy",
+      "tx_hash": "0x7265712d30636561346262333932000000000000000000000000000000000000",
+      "request_id": "req-0cea4bb392",
+      "details": {
+        "job_id": 1,
+        "reason_hash": "0x54e6ba211279bf51035042071089555f4b9e506d587ab1f52259154348aae0a4"
+      }
+    },
+    {
+      "id": "audit-ea8426cd",
+      "ts": "2026-06-09T09:21:05.871268+00:00",
+      "wallet_id": "0x2222222222222222222222222222222222222222",
+      "pact_id": "mock-pact-9b2edac6",
+      "action": "contract_call",
+      "contract": "0x0000000000000000000000000000000000002000",
+      "function_name": "submit",
+      "amount": 0,
+      "result": "allowed",
+      "reason": "within pact policy",
+      "tx_hash": "0x7265712d32306661356336313562000000000000000000000000000000000000",
+      "request_id": "req-20fa5c615b",
+      "details": {
+        "job_id": 1,
+        "deliverable_hash": "0xb8e7bb6867b964ac166320a9d745cb45b383b6811760225928327c7ccb7b622f"
+      }
+    },
+    {
+      "id": "audit-9ba54248",
+      "ts": "2026-06-09T09:21:05.869471+00:00",
+      "wallet_id": "0x1111111111111111111111111111111111111111",
+      "pact_id": "mock-pact-c041523d",
+      "action": "contract_call",
+      "contract": "0x0000000000000000000000000000000000002000",
+      "function_name": "fund",
+      "amount": 5000000,
+      "result": "allowed",
+      "reason": "within pact policy",
+      "tx_hash": "0x7265712d38353437663437313630000000000000000000000000000000000000",
+      "request_id": "req-8547f47160",
+      "details": {
+        "job_id": 1,
+        "expected_budget": 5000000
+      }
+    },
+    {
+      "id": "audit-db61909b",
+      "ts": "2026-06-09T09:21:05.869388+00:00",
+      "wallet_id": "0x1111111111111111111111111111111111111111",
+      "pact_id": "mock-pact-c041523d",
+      "action": "contract_call",
+      "contract": "0x0000000000000000000000000000000000002000",
+      "function_name": "setBudget",
+      "amount": 5000000,
+      "result": "allowed",
+      "reason": "within pact policy",
+      "tx_hash": "0x7265712d33383832343130633566000000000000000000000000000000000000",
+      "request_id": "req-3882410c5f",
+      "details": {
+        "job_id": 1,
+        "amount": 5000000
+      }
+    },
+    {
+      "id": "audit-91a2980d",
+      "ts": "2026-06-09T09:21:05.869264+00:00",
+      "wallet_id": "0x1111111111111111111111111111111111111111",
+      "pact_id": "mock-pact-c041523d",
+      "action": "contract_call",
+      "contract": "0x0000000000000000000000000000000000002000",
+      "function_name": "createJob",
+      "amount": 0,
+      "result": "allowed",
+      "reason": "within pact policy",
+      "tx_hash": "0x7265712d65386338303633626137000000000000000000000000000000000000",
+      "request_id": "req-e8c8063ba7",
+      "details": {
+        "description_hash": "0xea77971fd99e923ec76b3d817ce0221f64a6e99437552c46d8944a098522c317"
+      }
+    },
+    {
+      "id": "audit-82727194",
+      "ts": "2026-06-09T09:21:05.869091+00:00",
+      "wallet_id": "0x1111111111111111111111111111111111111111",
+      "pact_id": "mock-pact-c041523d",
+      "action": "contract_call",
+      "contract": "0x0000000000000000000000000000000000001000",
+      "function_name": "approve",
+      "amount": 5000000,
+      "result": "allowed",
+      "reason": "within pact policy",
+      "tx_hash": "0x7265712d61353764633062326362000000000000000000000000000000000000",
+      "request_id": "req-a57dc0b2cb",
+      "details": {
+        "spender": "0x0000000000000000000000000000000000002000",
+        "amount": 5000000
+      }
+    },
+    {
+      "id": "audit-07e91917",
+      "ts": "2026-06-09T09:21:05.868848+00:00",
+      "wallet_id": "0x3333333333333333333333333333333333333333",
+      "pact_id": "mock-pact-4a825220",
+      "action": "submit_pact",
+      "contract": null,
+      "function_name": null,
+      "amount": 0,
+      "result": "allowed",
+      "reason": "mock pact auto-approved for local demo",
+      "tx_hash": null,
+      "request_id": null,
+      "details": {
+        "intent": "PactBounty Evaluator Agent may complete or reject submitted jobs after verification.",
+        "wallet_id": "0x3333333333333333333333333333333333333333",
+        "allowed_contracts": [
+          "0x0000000000000000000000000000000000002000"
+        ],
+        "allowed_functions": [
+          "complete",
+          "reject"
+        ],
+        "max_single_tx_amount": 0,
+        "total_budget": 0,
+        "expires_in_seconds": 86400
+      }
+    },
+    {
+      "id": "audit-cdf234fc",
+      "ts": "2026-06-09T09:21:05.868768+00:00",
+      "wallet_id": "0x2222222222222222222222222222222222222222",
+      "pact_id": "mock-pact-9b2edac6",
+      "action": "submit_pact",
+      "contract": null,
+      "function_name": null,
+      "amount": 0,
+      "result": "allowed",
+      "reason": "mock pact auto-approved for local demo",
+      "tx_hash": null,
+      "request_id": null,
+      "details": {
+        "intent": "PactBounty Worker Agent may submit deliverable hashes to the AgenticCommerce escrow.",
+        "wallet_id": "0x2222222222222222222222222222222222222222",
+        "allowed_contracts": [
+          "0x0000000000000000000000000000000000002000"
+        ],
+        "allowed_functions": [
+          "submit"
+        ],
+        "max_single_tx_amount": 0,
+        "total_budget": 0,
+        "expires_in_seconds": 86400
+      }
+    },
+    {
+      "id": "audit-9f168139",
+      "ts": "2026-06-09T09:21:05.868613+00:00",
+      "wallet_id": "0x1111111111111111111111111111111111111111",
+      "pact_id": "mock-pact-c041523d",
+      "action": "submit_pact",
+      "contract": null,
+      "function_name": null,
+      "amount": 0,
+      "result": "allowed",
+      "reason": "mock pact auto-approved for local demo",
+      "tx_hash": null,
+      "request_id": null,
+      "details": {
+        "intent": "PactBounty Client Agent may approve MockUSDC, create an AgenticCommerce job, set its budget, and fund escrow within the approved demo budget.",
+        "wallet_id": "0x1111111111111111111111111111111111111111",
+        "allowed_contracts": [
+          "0x0000000000000000000000000000000000001000",
+          "0x0000000000000000000000000000000000002000"
+        ],
+        "allowed_functions": [
+          "approve",
+          "createJob",
+          "setBudget",
+          "fund",
+          "transfer_tokens"
+        ],
+        "max_single_tx_amount": 5000000,
+        "total_budget": 6000000,
+        "expires_in_seconds": 86400
+      }
+    }
+  ],
+  "agent_steps": [
+    {
+      "agent": "ClientAgent",
+      "title": "Submitted scoped CAW pact",
+      "status": "ok",
+      "details": {
+        "pact_id": "mock-pact-c041523d"
+      }
+    },
+    {
+      "agent": "WorkerAgent",
+      "title": "Submitted delivery CAW pact",
+      "status": "ok",
+      "details": {
+        "pact_id": "mock-pact-9b2edac6"
+      }
+    },
+    {
+      "agent": "EvaluatorAgent",
+      "title": "Submitted evaluation CAW pact",
+      "status": "ok",
+      "details": {
+        "pact_id": "mock-pact-4a825220"
+      }
+    },
+    {
+      "agent": "ClientAgent",
+      "title": "Approved MockUSDC escrow spend through CAW",
+      "status": "ok",
+      "details": {
+        "id": "tx-c9b8c668e4",
+        "status": "submitted",
+        "request_id": "req-a57dc0b2cb",
+        "tx_hash": "0x7265712d61353764633062326362000000000000000000000000000000000000",
+        "details": {
+          "mock": true,
+          "spender": "0x0000000000000000000000000000000000002000",
+          "amount": 5000000
+        }
+      }
+    },
+    {
+      "agent": "ClientAgent",
+      "title": "Created AgenticCommerce job",
+      "status": "ok",
+      "details": {
+        "tx": {
+          "id": "tx-9f32853e5f",
+          "status": "submitted",
+          "request_id": "req-e8c8063ba7",
+          "tx_hash": "0x7265712d65386338303633626137000000000000000000000000000000000000",
+          "details": {
+            "mock": true,
+            "description_hash": "0xea77971fd99e923ec76b3d817ce0221f64a6e99437552c46d8944a098522c317"
+          }
+        },
+        "job": {
+          "job_id": 1,
+          "client": "0x1111111111111111111111111111111111111111",
+          "provider": "0x2222222222222222222222222222222222222222",
+          "evaluator": "0x3333333333333333333333333333333333333333",
+          "token": "0x0000000000000000000000000000000000001000",
+          "budget": 0,
+          "escrowed": 0,
+          "expired_at": 1781083265,
+          "description_hash": "0xea77971fd99e923ec76b3d817ce0221f64a6e99437552c46d8944a098522c317",
+          "deliverable_hash": null,
+          "reason_hash": null,
+          "state": "Open"
+        }
+      }
+    },
+    {
+      "agent": "ClientAgent",
+      "title": "Set job budget",
+      "status": "ok",
+      "details": {
+        "tx": {
+          "id": "tx-c5023215a0",
+          "status": "submitted",
+          "request_id": "req-3882410c5f",
+          "tx_hash": "0x7265712d33383832343130633566000000000000000000000000000000000000",
+          "details": {
+            "mock": true,
+            "job_id": 1,
+            "amount": 5000000
+          }
+        },
+        "job": {
+          "job_id": 1,
+          "client": "0x1111111111111111111111111111111111111111",
+          "provider": "0x2222222222222222222222222222222222222222",
+          "evaluator": "0x3333333333333333333333333333333333333333",
+          "token": "0x0000000000000000000000000000000000001000",
+          "budget": 5000000,
+          "escrowed": 0,
+          "expired_at": 1781083265,
+          "description_hash": "0xea77971fd99e923ec76b3d817ce0221f64a6e99437552c46d8944a098522c317",
+          "deliverable_hash": null,
+          "reason_hash": null,
+          "state": "Open"
+        }
+      }
+    },
+    {
+      "agent": "ClientAgent",
+      "title": "Funded escrow through CAW",
+      "status": "ok",
+      "details": {
+        "tx": {
+          "id": "tx-9fb1c40903",
+          "status": "submitted",
+          "request_id": "req-8547f47160",
+          "tx_hash": "0x7265712d38353437663437313630000000000000000000000000000000000000",
+          "details": {
+            "mock": true,
+            "job_id": 1,
+            "expected_budget": 5000000
+          }
+        },
+        "job": {
+          "job_id": 1,
+          "client": "0x1111111111111111111111111111111111111111",
+          "provider": "0x2222222222222222222222222222222222222222",
+          "evaluator": "0x3333333333333333333333333333333333333333",
+          "token": "0x0000000000000000000000000000000000001000",
+          "budget": 5000000,
+          "escrowed": 5000000,
+          "expired_at": 1781083265,
+          "description_hash": "0xea77971fd99e923ec76b3d817ce0221f64a6e99437552c46d8944a098522c317",
+          "deliverable_hash": null,
+          "reason_hash": null,
+          "state": "Funded"
+        },
+        "balances": {
+          "0x1111111111111111111111111111111111111111": 95000000,
+          "0x2222222222222222222222222222222222222222": 0,
+          "0x3333333333333333333333333333333333333333": 0,
+          "0xe5crow0000000000000000000000000000000000": 5000000
+        }
+      }
+    },
+    {
+      "agent": "WorkerAgent",
+      "title": "Read vulnerable Solidity target",
+      "status": "ok",
+      "details": {
+        "path": "/mnt/data/pactbounty/contracts/src/VulnerableVault.sol"
+      }
+    },
+    {
+      "agent": "WorkerAgent",
+      "title": "Generated audit plan with GLM-5.1 adapter",
+      "status": "ok",
+      "details": {
+        "vulnerability": "Reentrancy in withdraw(): ETH is sent before user balance is zeroed.",
+        "severity": "High",
+        "reasoning": "The contract performs an untrusted external call to msg.sender before updating internal accounting. A malicious receiver can re-enter withdraw() and drain funds.",
+        "patch_strategy": "Apply checks-effects-interactions: set balance to zero before the call, and add a nonReentrant guard as defense in depth.",
+        "test_strategy": "Run a reentrancy attacker test against the vulnerable version and verify the patched version only allows a single withdrawal."
+      }
+    },
+    {
+      "agent": "WorkerAgent",
+      "title": "Created patched contract",
+      "status": "ok",
+      "details": {
+        "strategy": "Apply checks-effects-interactions: set balance to zero before the call, and add a nonReentrant guard as defense in depth."
+      }
+    },
+    {
+      "agent": "WorkerAgent",
+      "title": "Ran deterministic local test loop",
+      "status": "ok",
+      "details": {
+        "result": "PASS",
+        "mode": "mock"
+      }
+    },
+    {
+      "agent": "WorkerAgent",
+      "title": "Prepared deliverable report and patch hash",
+      "status": "ok",
+      "details": {}
+    },
+    {
+      "agent": "WorkerAgent",
+      "title": "Submitted deliverable hash through CAW",
+      "status": "ok",
+      "details": {
+        "tx": {
+          "id": "tx-99427aaf8a",
+          "status": "submitted",
+          "request_id": "req-20fa5c615b",
+          "tx_hash": "0x7265712d32306661356336313562000000000000000000000000000000000000",
+          "details": {
+            "mock": true,
+            "job_id": 1,
+            "deliverable_hash": "0xb8e7bb6867b964ac166320a9d745cb45b383b6811760225928327c7ccb7b622f"
+          }
+        },
+        "job": {
+          "job_id": 1,
+          "client": "0x1111111111111111111111111111111111111111",
+          "provider": "0x2222222222222222222222222222222222222222",
+          "evaluator": "0x3333333333333333333333333333333333333333",
+          "token": "0x0000000000000000000000000000000000001000",
+          "budget": 5000000,
+          "escrowed": 5000000,
+          "expired_at": 1781083265,
+          "description_hash": "0xea77971fd99e923ec76b3d817ce0221f64a6e99437552c46d8944a098522c317",
+          "deliverable_hash": "0xb8e7bb6867b964ac166320a9d745cb45b383b6811760225928327c7ccb7b622f",
+          "reason_hash": null,
+          "state": "Submitted"
+        }
+      }
+    },
+    {
+      "agent": "EvaluatorAgent",
+      "title": "Loaded Worker deliverable",
+      "status": "ok",
+      "details": {
+        "report_path": "/mnt/data/pactbounty/backend/storage/deliverables/job-1-25517ba9/audit-report.md",
+        "patch_path": "/mnt/data/pactbounty/backend/storage/deliverables/job-1-25517ba9/PatchedVault.sol"
+      }
+    },
+    {
+      "agent": "EvaluatorAgent",
+      "title": "Checked patch invariants",
+      "status": "ok",
+      "details": {
+        "has_reentrancy_finding": true,
+        "zeros_balance_before_call": true,
+        "has_guard": true,
+        "hash_prefix_ok": true
+      }
+    },
+    {
+      "agent": "EvaluatorAgent",
+      "title": "Produced structured decision",
+      "status": "complete",
+      "details": {
+        "score": 92,
+        "reason_hash": "0x54e6ba211279bf51035042071089555f4b9e506d587ab1f52259154348aae0a4"
+      }
+    },
+    {
+      "agent": "EvaluatorAgent",
+      "title": "Completed job and released payment through CAW",
+      "status": "ok",
+      "details": {
+        "tx": {
+          "id": "tx-8b2c627c62",
+          "status": "submitted",
+          "request_id": "req-0cea4bb392",
+          "tx_hash": "0x7265712d30636561346262333932000000000000000000000000000000000000",
+          "details": {
+            "mock": true,
+            "job_id": 1,
+            "reason_hash": "0x54e6ba211279bf51035042071089555f4b9e506d587ab1f52259154348aae0a4"
+          }
+        },
+        "job": {
+          "job_id": 1,
+          "client": "0x1111111111111111111111111111111111111111",
+          "provider": "0x2222222222222222222222222222222222222222",
+          "evaluator": "0x3333333333333333333333333333333333333333",
+          "token": "0x0000000000000000000000000000000000001000",
+          "budget": 5000000,
+          "escrowed": 0,
+          "expired_at": 1781083265,
+          "description_hash": "0xea77971fd99e923ec76b3d817ce0221f64a6e99437552c46d8944a098522c317",
+          "deliverable_hash": "0xb8e7bb6867b964ac166320a9d745cb45b383b6811760225928327c7ccb7b622f",
+          "reason_hash": "0x54e6ba211279bf51035042071089555f4b9e506d587ab1f52259154348aae0a4",
+          "state": "Completed"
+        },
+        "balances": {
+          "0x1111111111111111111111111111111111111111": 95000000,
+          "0x2222222222222222222222222222222222222222": 5000000,
+          "0x3333333333333333333333333333333333333333": 0,
+          "0xe5crow0000000000000000000000000000000000": 0
+        }
+      }
+    },
+    {
+      "agent": "ClientAgent",
+      "title": "CAW denied out-of-policy transfer",
+      "status": "denied",
+      "details": {
+        "code": "amount_limit_exceeded",
+        "reason": "amount 20000000 exceeds max_single_tx_amount 5000000",
+        "details": {
+          "purpose": "intentional policy-denial demo",
+          "destination": "0x9999999999999999999999999999999999999999",
+          "token_id": "mUSDC"
+        },
+        "suggestion": "Reduce the requested amount or request a new pact with a narrower approved policy."
+      }
+    }
+  ],
+  "evidence": {
+    "chain_id": 11155111,
+    "mock_usdc": "0x0000000000000000000000000000000000001000",
+    "agentic_commerce": "0x0000000000000000000000000000000000002000",
+    "client_wallet": "0x1111111111111111111111111111111111111111",
+    "worker_wallet": "0x2222222222222222222222222222222222222222",
+    "evaluator_wallet": "0x3333333333333333333333333333333333333333",
+    "job_id": 1,
+    "tx_hashes": [
+      "0x7265712d61353764633062326362000000000000000000000000000000000000",
+      "0x7265712d65386338303633626137000000000000000000000000000000000000",
+      "0x7265712d33383832343130633566000000000000000000000000000000000000",
+      "0x7265712d38353437663437313630000000000000000000000000000000000000",
+      "0x7265712d32306661356336313562000000000000000000000000000000000000",
+      "0x7265712d30636561346262333932000000000000000000000000000000000000"
+    ],
+    "denial": {
+      "code": "amount_limit_exceeded",
+      "reason": "amount 20000000 exceeds max_single_tx_amount 5000000",
+      "details": {
+        "purpose": "intentional policy-denial demo",
+        "destination": "0x9999999999999999999999999999999999999999",
+        "token_id": "mUSDC"
+      },
+      "suggestion": "Reduce the requested amount or request a new pact with a narrower approved policy."
+    },
+    "deliverable_hash": "0xb8e7bb6867b964ac166320a9d745cb45b383b6811760225928327c7ccb7b622f",
+    "reason_hash": "0x54e6ba211279bf51035042071089555f4b9e506d587ab1f52259154348aae0a4",
+    "report_path": "evidence/sample-deliverables/audit-report.md",
+    "patch_path": "evidence/sample-deliverables/PatchedVault.sol"
+  }
+}

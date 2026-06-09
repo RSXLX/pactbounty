@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.env
+backend/storage/
+
+# Node
+node_modules/
+.next/
+dist/
+coverage/
+npm-debug.log*
+
+# Foundry / Hardhat
+contracts/out/
+contracts/cache/
+contracts/broadcast/
+contracts/.env
+
+# Misc
+.DS_Store
+*.log
