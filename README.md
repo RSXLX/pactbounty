@@ -1,5 +1,9 @@
 # PactBounty
 
+[![CI Status](https://github.com/RSXLX/pactbounty/actions/workflows/ci.yml/badge.svg)](https://github.com/RSXLX/pactbounty/actions/workflows/ci.yml)
+[![Release](https://github.com/RSXLX/pactbounty/actions/workflows/release.yml/badge.svg)](https://github.com/RSXLX/pactbounty/actions/workflows/release.yml)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRSXLX%2Fpactbounty&root-directory=frontend&env=NEXT_PUBLIC_API_BASE_URL)
+
 **一句话：** CAW 驱动的 Agent-to-Agent 智能合约审计赏金市场。Client Agent 用 Cobo Agentic Wallet 创建并托管审计任务；Worker Agent 自动审计、修复、提交交付物；Evaluator Agent 验收后释放付款；越权资金操作会被 CAW Pact 拦截并留下 audit log。
 
 > 推荐提交赛道：**Cobo 赛道｜Agentic Economy × Cobo Agentic Wallet**  
@@ -188,3 +192,13 @@ README 里也要补：
 3. 接真实 CAW：先跑官方 hello world，再接 `contract_call`。
 4. 接真实 GLM-5.1：让 Worker/Evaluator 真实输出 trace。
 5. 录 3–5 分钟 Demo 视频，不要展示太多代码，重点展示资金闭环和 CAW denial。
+
+---
+
+## 生产部署与 CI/CD
+
+我们已经配置了自动化的 CI/CD 流程与多环境部署支持：
+* **部署手册**：有关合约部署、后端云托管与前端 Vercel 一键部署的详细配置，请阅读 [DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md)。
+* **持续集成 (CI)**：每次 Push / Pull Request 会触发 `.github/workflows/ci.yml`，对 Solidity 合约、Python 后端及 TypeScript 前端进行静态校验与测试。
+* **版本发布与 Docker 镜像**：推送 `v*` 标签时（如 `git tag v1.0.0` 并 push），会自动创建 GitHub Release，并构建生产级 Docker 镜像推送至 GitHub Container Registry (GHCR)。
+

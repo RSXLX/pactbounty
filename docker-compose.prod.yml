@@ -1,0 +1,23 @@
+services:
+  backend:
+    image: ghcr.io/rsxlx/pactbounty-backend:latest
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - backend-storage:/app/storage
+
+  frontend:
+    image: ghcr.io/rsxlx/pactbounty-frontend:latest
+    restart: always
+    environment:
+      - NEXT_PUBLIC_API_BASE_URL=https://your-backend-domain.com # 请替换为后端实际的公网域名
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  backend-storage:
